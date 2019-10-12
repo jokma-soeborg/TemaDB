@@ -11,6 +11,6 @@ I Script biblioteket laves et bibliotek der hedder `OGR2OGR`, og indholdet fra o
 
 Derefter køres filen `SDKShell.bat` fra roden af `OGR2OGR` biblioteket en enkelt gang
 
-Derefter tilrettes konfig filen i `Script/config/TemaDb.config.json`
+Derefter tilrettes konfig filen i `Src/Script/config/TemaDb.config.json`
 
 Derefter kan `TemaDb.ps1` startes fra PowerShell
