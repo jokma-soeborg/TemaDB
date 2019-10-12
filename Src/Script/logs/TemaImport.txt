@@ -1,0 +1,8 @@
+2019-10-12 23:14:27:245 INFO [TemaDB.ps1: line 58] Importing module: C:\Projects\TemaDb - Copy\Trunk\Src\Script\manifests\database.psd1
+2019-10-12 23:14:27:354 INFO [TemaDB.ps1: line 58] Importing module: C:\Projects\TemaDb - Copy\Trunk\Src\Script\manifests\import.psd1
+2019-10-12 23:14:27:440 INFO [TemaDB.ps1: line 58] Importing module: C:\Projects\TemaDb - Copy\Trunk\Src\Script\manifests\logs.psd1
+2019-10-12 23:14:27:455 INFO [TemaDB.ps1: line 58] Importing module: C:\Projects\TemaDb - Copy\Trunk\Src\Script\manifests\ogr2ogr.psd1
+2019-10-12 23:14:27:549 INFO [TemaDB.ps1: line 90] Mode is TestDB
+2019-10-12 23:14:27:555 INFO [database.psm1: line 5] Testing DB connection
+2019-10-12 23:14:27:698 INFO [database.psm1: line 10] DB connection OK
+2019-10-12 23:14:27:707 INFO [TemaDB.ps1: line 107] All Done, so exiting now

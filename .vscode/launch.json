@@ -8,7 +8,7 @@
             "name": "TemaDB -Import",
             "type": "PowerShell",
             "request": "launch",
-            "script": "${workspaceRoot}/Script/TemaDB.ps1",
+            "script": "${workspaceRoot}/Src/Script/TemaDB.ps1",
             "args": [ "-Mode", "import" ],
             "cwd": "${workspaceRoot}/Script"
         },
@@ -16,7 +16,7 @@
             "name": "TemaDB -TestDB",
             "type": "PowerShell",
             "request": "launch",
-            "script": "${workspaceRoot}/Script/TemaDB.ps1",
+            "script": "${workspaceRoot}/Src/Script/TemaDB.ps1",
             "args": [ "-Mode", "TestDB" ],
             "cwd": "${workspaceRoot}/Script"
         },
