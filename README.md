@@ -1,4 +1,4 @@
-## Synkroniserings komponenten ##
+## Synkroniseringskomponenten ##
 
 [![master](https://img.shields.io/badge/master-stable-green.svg?maxAge=2592000)]()
 ![Maintenance](https://img.shields.io/badge/Maintained-Yes-green.svg)
