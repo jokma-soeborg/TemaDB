@@ -19,12 +19,12 @@ Følgende Regions programmer benytter pt. dette:
 
 ### Installation ###
 
-* Se [Install](https://github.com/Danske-Regioner-Miljoe-Tvaerregional/PowerShell-RIT/INSTALL.MD)
+* Se [Install](https://github.com/Danske-Regioner-Miljoe-Tvaerregional/PowerShell-RIT/blob/master/INSTALL.MD)
 
 ### Udvikler ###
 
-* Se [Udvikler](https://github.com/Danske-Regioner-Miljoe-Tvaerregional/PowerShell-RIT/DEVELOPER.MD)
+* Se [Udvikler](https://github.com/Danske-Regioner-Miljoe-Tvaerregional/PowerShell-RIT/blob/master/DEVELOPER.MD)
 
 ### Changelog ###
 
-* Se [Changelog](https://github.com/Danske-Regioner-Miljoe-Tvaerregional/PowerShell-RIT/CHANGELOG.MD)
+* Se [Changelog](https://github.com/Danske-Regioner-Miljoe-Tvaerregional/PowerShell-RIT/blob/master/CHANGELOG.MD)
