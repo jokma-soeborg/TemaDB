@@ -136,14 +136,20 @@ Function Write-LogLine ($Line) {
     {
         if ($Line -Match 'FATAL')
         {
-            Write-Host $Line -ForegroundColor Red
-
-
+            Write-Host $Line -ForegroundColor Red     
         }
         else
         {
             Write-Host $Line       
         }        
+    }
+    if ($Line -Match 'FATAL')
+    {        
+        # Check if mail module is imported, before trying to send an email        
+        if (Get-Module "email")
+        {
+            SendErrorMail $Line
+        }            
     }
 }
 

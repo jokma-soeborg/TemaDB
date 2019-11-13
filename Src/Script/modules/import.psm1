@@ -22,7 +22,13 @@ function ImportTemaLag(){
     Unzip -zipfile $outputFile
     $ExtractDir = "$PSScriptRoot\..\$($MyCfg.IMPORT.ExtractDir)"
     $outpath = $ExtractDir + "\" + [io.path]::GetFileNameWithoutExtension($outputFile)
-    TemaToDB -Folder $outpath -Row $Row
+    $returnVal = TemaToDB -Folder $outpath -Row $Row
+    if (!$returnVal)
+    {
+        $fejlTekst = "Downloaded fil: '{0}' for temalag: '{1}' indeholdte ingen filer" -f $Row[3], $Row[1]
+        LogEntryToDatabase -TEMAMETADATAID $Row[0] -FEJLKODE -1 -FEJLTEKST $fejlTekst
+    }
+
 }
 
 
@@ -50,7 +56,7 @@ function DownloadTemaLag(){
     # Download the file
     try {
         Invoke-WebRequest -Uri $Url -OutFile $OutputFile        
-        Write-Log -Message "File downloaded" -Level "Debug" | Out-Null
+        Write-Log -Message "File downloaded" -Level "Debug" | Out-Null        
     }
     catch [Exception]{
         Write-Log -Message "Fatal error downloading Temalag:  $_.Exception.Message" -Level "Fatal" | Out-Null

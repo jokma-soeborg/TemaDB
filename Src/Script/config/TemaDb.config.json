@@ -32,13 +32,24 @@
     },
     "SMTP":
     {
-        "SMTPHost": "smtp.swecogroup.com",
-        "SMTPPort": 25,
+        // Should we send an info mail, when job is done?
+        "SendInfoMail": true,
+        // html template to use. MUST reside in config directory
+        "InfoMailTemplate": "infomail.htm",
+        // Should we send an Error mail, when job is done?
+        "SendErrorMail": true,
+        // html template to use. MUST reside in config directory
+        "ErrorMailTemplate": "errormail.htm",
+        "ErrorEmailSubject": "ERROR - Mail from TemaImport",
         "EmailSubject": "Mail from TemaImport",
         "EmailFrom": "TemaImport-NOREPLY@sweco.dk",
-        "EmailToCommaSeperated": ["tommy.mikkelsen@sweco.dk", "somebody@somewhere.com"],
+        // Comma separated list of recipients
+        "EmailToCommaSeperated": ["tommy.mikkelsen@sweco.dk"],
+        "SMTPHost": "smtp.swecogroup.com",
+        "SMTPPort": 25,
+        // If below is an empty string, no credentials are needed
         "SMTPHostUsr": "",
         "SMTPHostUsrPwd": "MyPassWord1",
-        "SMTPHostUseSSL": false
+        "SMTPHostUseSSL": false        
     }
 }

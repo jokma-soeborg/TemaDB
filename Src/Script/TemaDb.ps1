@@ -1,6 +1,6 @@
 <#
 .NOTES
-    Version:    1.0.0    
+    Version:    2.0.0    
 .SYNOPSIS
     PowerShell script to download and import spatial data into a database in MS SQL
 .DESCRIPTION  
@@ -34,6 +34,10 @@
         [String]$mode="Help"    #Mode switch, can be either Help, Import, AddTema or TestDB
     )
 
+    # Note start time
+    $startTime = (Get-Date).toString("yyyy/MM/dd HH:mm:ss")
+    # Initialize Temalag der behandles
+    $temalag = New-Object System.Collections.Generic.List[string]
     # Read Config JSON to global variable
     try {
         $configFile = (Get-Content -Raw -Path "$PSScriptRoot\Config\TemaDb.config.json")
@@ -56,11 +60,11 @@
         foreach ($file in $files) {
             try{
             Write-Log -Message "Importing module: $file" -Level "Info" | Out-Null             
-            Import-Module $file -Force
+            Import-Module $file -Force            
             }
             catch [exception]
             {
-                Write-Log -Message "Fejl ved import af modul $file : $_.Exception.Message" -Level "Fatal" | Out-Null                
+                Write-Log -Message "Fejl ved import af modul $file : $_.Exception.Message" -Level "Fatal" | Out-Null                                
             }
         }
     #endregion IncludesImports    
@@ -71,12 +75,15 @@
         "import"
         {
             Write-Log -Message "Mode is Import" -Level "Info" | Out-Null   
-            $ds = GetTemaLagToUpdate     
-            
+            $ds = GetTemaLagToUpdate                 
             foreach ($Row in $ds.Tables[0].Rows)
-            {                
+            {
+                # Add name to a list, that we use when/if sending an info mail
+                $temalag.Add($Row[1]);
                 ImportTemaLag -Row $Row                
-            }           
+            }                
+            $endTime = (Get-Date).toString("yyyy/MM/dd HH:mm:ss")
+            SendInfoMail -StartTime $startTime -EndTime $endTime -Temalag $temalag            
             break
         }
         "addtema"
@@ -86,7 +93,7 @@
             break
         }
         "testdb"
-        {            
+        {                         
             Write-Log -Message "Mode is TestDB" -Level "Info" | Out-Null            
             if (TestDB)
             {

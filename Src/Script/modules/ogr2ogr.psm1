@@ -7,14 +7,20 @@ function TemaToDB{
         [Parameter(Mandatory=$True)]
         [System.Data.DataRow]
         $Row
-    )
-    # Get filenames of type shp or tab    
+    )        
     $fileNames = Get-ChildItem -Path $Folder -File -Recurse -Include *.tab,*.shp
-    foreach ($fileName in $fileNames)
+    if (!$fileNames)
     {
-        SendtoOGR -fileName $fileName -Row $Row
+        Write-Log -Message "$Folder indeholdte ingen filer"  -Level "Fatal"|Out-Null 
+        return $false       
     }
- 
+    else
+    {            
+        foreach ($fileName in $fileNames)
+        {
+            SendtoOGR -fileName $fileName -Row $Row
+        }        
+    } 
 }
 
 function SendtoOGR{
