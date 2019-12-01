@@ -83,8 +83,15 @@
                 ImportTemaLag -Row $Row                
             }                
             $endTime = (Get-Date).toString("yyyy/MM/dd HH:mm:ss")
-            SendInfoMail -StartTime $startTime -EndTime $endTime -Temalag $temalag            
-            break
+            if ($temalag.Count -eq 0)
+            {
+                SendInfoMail -StartTime $startTime -EndTime $endTime -Temalag "Ingen temalag blev hentet ned"    
+            }
+            else
+            {
+                SendInfoMail -StartTime $startTime -EndTime $endTime -Temalag $temalag
+            }            
+            breaks
         }
         "addtema"
         {

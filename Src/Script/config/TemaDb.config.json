@@ -7,17 +7,18 @@
     "SQL":
     {
         // Connection string til TemaDB
-        "ConnectionString": "Data Source=sql2016.mssql.gdev.local;database=TemaDBTMI;User ID=Powershell;Password=Powershell1"
-        //"ConnectionString": "Data Source=mssql2016.mssql.ghop.lan\\sql2016b;database=TemaDB;User ID=Powershell;Password=Powershell1"
+        "ConnectionString": "Data Source=sql2016.mssql.gdev.local;database=TemaDBTMI;User ID=Powershell;Password=Powershell1"        
     },
     "Logs": {
         "logFile": "TemaImport.txt",
         // Valide log levels er: "VERBOSE","DEBUG","INFO","WARN","ERROR","FATAL"
         "logLevel": "VERBOSE",
-        "logSize": "1kb",
-        "logCount": 10,
+        // Valide log fil sizes er: "KB","MB","GB","PT" eller bare bytes
+        "logSize": "5KB",
+        "logCount": 5,
         "TimeFormat": "yyyy-MM-dd HH:mm:ss.fff",
         "TimeSpanFormat": "dd\\.hh\\:mm\\:ss\\.fff",
+        "TimeFormat_File" : "yyyy-MM-dd",
         // Only set to true when developing
         "LogToConsole": true    
     },
