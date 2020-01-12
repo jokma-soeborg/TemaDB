@@ -1,3 +1,5 @@
 Src/Script/logs
 Src/Script/Ogr2Ogr
 Src/Script/Temp
+Src/Script/config/aes.key
+Src/Script/config/TemaDb.config.json
