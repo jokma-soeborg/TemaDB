@@ -1,11 +1,11 @@
 -- ==========================================================================
 -- Author                 : RUA, Sweco
 -- Create date            : 2019-05-28
--- Updated                : $Date: 2019-09-02 14:22:38 +0200 (ma, 02 sep 2019) $
--- Updated by             : $Author: rua $
+-- Updated                : $Date: 2019-12-29 00:15:22 +0100 (sø, 29 dec 2019) $
+-- Updated by             : $Author: admtmi $
 -- Description            : Stored procedure spKonfliktanalyse_RIT
 -- ==========================================================================
-DECLARE @svn_revision	varchar(15)	= '$Rev: 1953 $'
+DECLARE @svn_revision	varchar(15)	= '$Rev: 31 $'
 DECLARE @db_version		varchar(15)	= '1.0'
 DECLARE @scriptnavn		varchar(60)	= '005 spKonfliktanalyse_RIT.sql'
 DECLARE @beskrivelse	varchar(250)= 'Stored procedure spKonfliktanalyse_RIT'

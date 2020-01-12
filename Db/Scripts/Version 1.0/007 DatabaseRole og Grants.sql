@@ -1,11 +1,11 @@
 -- ==========================================================================
 -- Author                 : RUA, Sweco
 -- Create date            : 2019-06-21
--- Updated                : $Date: 2019-08-19 15:08:18 +0200 (ma, 19 aug 2019) $
--- Updated by             : $Author: rua $
+-- Updated                : $Date: 2019-12-29 00:15:22 +0100 (sø, 29 dec 2019) $
+-- Updated by             : $Author: admtmi $
 -- Description            : Databaseroles and grants
 -- ==========================================================================
-DECLARE @svn_revision	varchar(15)	= '$Rev: 1899 $'
+DECLARE @svn_revision	varchar(15)	= '$Rev: 31 $'
 DECLARE @db_version		varchar(15)	= '1.0'
 DECLARE @scriptnavn		varchar(60)	= '007 DatabaseRole og Grants.sql'
 DECLARE @beskrivelse	varchar(250)= 'Databaseroles and grants'

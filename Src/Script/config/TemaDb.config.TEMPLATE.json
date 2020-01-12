@@ -11,14 +11,16 @@
     "SQL":
     {
         // Connection string til TemaDB
-        "ConnectionString": "Data Source=sql2016.mssql.gdev.local;database=TemaDBTMI;User ID=Powershell;Password=Powershell1"        
+        "ConnectionString": "Data Source=sql2016.mssql.gdev.local;database=TemaDB;User ID=YYYYYYY;Password=XXXXXXXX"        
     },
     "Logs": {
         "logFile": "TemaImport.txt",
         // Valide log levels er: "VERBOSE","DEBUG","INFO","WARN","ERROR","FATAL"
-        "logLevel": "VERBOSE",
+        // Advarsel!!!!!!!
+        // I verbose mode skrives Pwd til databasen ud i klar tekst
+        "logLevel": "DEBUG",
         // Valide log fil sizes er: "KB","MB","GB","PT" eller bare bytes
-        "logSize": "5KB",
+        "logSize": "1MB",
         "logCount": 5,
         "TimeFormat": "yyyy-MM-dd HH:mm:ss.fff",
         "TimeSpanFormat": "dd\\.hh\\:mm\\:ss\\.fff",
@@ -30,7 +32,7 @@
     {
         // Name of folder below Script folder, where OGR2OGR resides
         "NameOfOGR2OGRFolder": "ogr2ogr",
-        "ConnectionStr": "\"MSSQL:server=sql2016.mssql.gdev.local;database=TemaDBTMI;UID=Powershell;PWD=Powershell1;\"",        
+        "ConnectionStr": "\"MSSQL:server=sql2016.mssql.gdev.local;database=TemaDBTMI;UID=YYYYYYY;PWD=XXXXXXXX;\"",        
         // SRID, that all projections will be converted into
         "ForcedSRid" : "25832"
     },
@@ -48,7 +50,7 @@
         "ErrorMailTemplate": "errormail.htm",
         "ErrorEmailSubject": "ERROR - Mail from TemaImport",
         // Comma separated list of recipients
-        "EmailToCommaSeperated": ["tommy.mikkelsen@sweco.dk"],
+        "EmailToCommaSeperated": ["MyEmalAddress@DenneRegion.dk"],
         "SMTPHost": "smtp.swecogroup.com",
         "SMTPPort": 25,
         // If below is an empty string, no credentials are needed

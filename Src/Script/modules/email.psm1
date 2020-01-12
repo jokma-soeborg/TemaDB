@@ -106,5 +106,47 @@ function SendInfoMail{
     }             
 }
 
+function TestMail
+{
+    try
+    {
+        $retVal = $true
+
+        # Get mail body from filesystem
+        $body = "This is a test mail" # Get HTML text as one line
+        # Build-up hash table with arguments
+        $arguments = @{
+            To = $($MyCfg.SMTP.EmailToCommaSeperated)
+            From = $($MyCfg.SMTP.EmailFrom)
+            Subject = $($MyCfg.SMTP.EmailSubject)
+            Port = $($MyCfg.SMTP.SMTPPort)
+            SmtpServer = $($MyCfg.SMTP.SMTPHost)
+            Encoding = "UTF8"
+            UseSSL = $($MyCfg.SMTP.SMTPHostUseSSL)
+            Priority = "Normal"
+            ErrorVariable = "Err"
+            ErrorAction = "SilentlyContinue"
+        }        
+        # Send mail, and do inplace replacement of params
+        # Note: Send-MailMessage fejl fanges IKKE af Try/Catch, så vi må rejse den selv        
+        Send-MailMessage @arguments -BodyAsHtml ($body)
+        if($Err)
+        {
+            throw $Err            
+        }
+        return $retVal
+    }
+    catch [Exception]
+    {
+        $e = $_.Exception
+        $line = $_.InvocationInfo.ScriptLineNumber
+        $msg = $e.Message
+        Write-Log -Message "Exception paa linie $line var '$msg'"  -Level "Fatal"|Out-Null
+        Write-Log -Message $e -Level "Fatal"|Out-Null  
+        return $false        
+    }      
+}
+
 Export-ModuleMember -Function "SendInfoMail"
 Export-ModuleMember -Function "SendErrorMail"
+Export-ModuleMember -Function "TestMail"

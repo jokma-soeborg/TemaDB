@@ -1,17 +1,16 @@
 #
-# Module manifest for module 'email'
-
+# Module manifest for module 'password'
 
 @{
 
     # Script module or binary module file associated with this manifest
-    RootModule = './../modules/email.psm1'
+    RootModule = './../modules/password.psm1'
     
     # Version number of this module.
     ModuleVersion = '1.0'
     
     # ID used to uniquely identify this module
-    GUID = 'd72b2b2e-58f8-4225-b608-b5153d442df2'
+    GUID = 'fd4ce97d-d5e9-440d-8b21-ced236e87fb2'
     
     # Author of this module
     Author = ''
@@ -62,7 +61,7 @@
     # NestedModules = @()
     
     # Functions to export from this module
-    FunctionsToExport = 'SendInfoMail', 'SendErrorMail', 'TestMail'
+    FunctionsToExport = 'SetPwd', 'GetPwd', 'CreateAESKey'
     
     # Cmdlets to export from this module
     CmdletsToExport = '*'

@@ -1,22 +1,20 @@
-USE [TemaDB]
-GO
+
 -- ==========================================================================
 -- Author                 : RUA, Sweco
--- Create date            : 2019-08-08
+-- Create date            : 2019-12-28
 -- Updated                : $Date: 2019-12-29 00:15:22 +0100 (sÃ¸, 29 dec 2019) $
 -- Updated by             : $Author: admtmi $
 -- Description            : Stored procedure spDecryptPwd
 -- ==========================================================================
 DECLARE @svn_revision	varchar(15)	= '$Rev: 31 $'
-DECLARE @db_version		varchar(15)	= '1.0'
-DECLARE @scriptnavn		varchar(60)	= '010 spGetSourcePwd.sql'
-DECLARE @beskrivelse	varchar(250)= 'Stored procedure spGetSourcePwd'
+DECLARE @db_version		varchar(15)	= '2.0'
+DECLARE @scriptnavn		varchar(60)	= '002 spGetSourcePwd.sql'
+DECLARE @beskrivelse	varchar(250)= 'Update SP spGetSourcePwd'
 
 
 INSERT INTO script_log (db_version,dato,scriptnavn,beskrivelse,svn_revision)
 VALUES  (@db_version,getdate(),@scriptnavn,@beskrivelse,@svn_revision);
 GO
-
 
 --DROP PROCEDURE IF EXISTS PROD.spGetSourcePwd;
 IF EXISTS(SELECT s.name, p.* FROM sys.procedures p
@@ -26,30 +24,17 @@ IF EXISTS(SELECT s.name, p.* FROM sys.procedures p
 BEGIN
     DROP PROCEDURE PROD.spGetSourcePwd
 END
-go
+GO
 
-/* Krypterer password og opdaterer tabellen TemaMetaData med den krypterde værdi */
-CREATE PROCEDURE PROD.spGetSourcePwd
+CREATE PROCEDURE [PROD].[spGetSourcePwd]
 	@TemaMetaDataID	UNIQUEIDENTIFIER,
-	@pwd			VARCHAR(25)			OUTPUT
+	@pwd			VARCHAR(max)			OUTPUT
 AS
 BEGIN
-
-	-- Open the symmetric key with which to decrypt the data.  
-	OPEN SYMMETRIC KEY SourcePwd_Key  
-	   DECRYPTION BY CERTIFICATE TemaDBCert;  
-
-  
-	-- Decrypt
-	SELECT @PWD = CONVERT(varchar, 
-	                      DecryptByKey(sourcepwd, -- the decryptet data "ciphertext"
-                                       1,         -- indicates whether the original encryption process included, and encrypted,
-                                       HashBytes('SHA1', CONVERT(varbinary, ID) ) -- authenticator
-                                      )
-                         )
+	SELECT @PWD = [SOURCEPWD]
 	FROM prod.TEMAMETADATA
 	WHERE ID = @TemaMetaDataID
-
 END
-GO  
+GO
+
 

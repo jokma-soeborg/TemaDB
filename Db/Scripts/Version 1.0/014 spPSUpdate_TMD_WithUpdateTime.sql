@@ -1,8 +1,8 @@
 -- ==========================================================================
 -- Author                 : TMI, RUA Sweco
 -- Create date            : 2019-08-13
--- Updated                : $Date: 2019-10-06 14:01:08 +0200 (sø, 06 okt 2019) $
--- Updated by             : $Author: rua $
+-- Updated                : $Date: 2019-12-29 00:15:22 +0100 (sø, 29 dec 2019) $
+-- Updated by             : $Author: admtmi $
 -- Description            : Procedure til at opdatere last update time i TemaMetaData tabellen fra PowerShell
 --
 -- Release number         : 1.0
@@ -13,7 +13,7 @@ SET ANSI_PADDING ON
 SET NOCOUNT ON
 GO
 
-DECLARE @svn_revision	varchar(15)	= '$Rev: 6 $'
+DECLARE @svn_revision	varchar(15)	= '$Rev: 31 $'
 DECLARE @db_version		varchar(15)	= '1.0' 
 DECLARE @scriptnavn		varchar(60)	= '014 spPSUpdate_TMD_WithUpdateTime.sql'
 DECLARE @beskrivelse	varchar(250)= 'Procedure til at opdatere last update time i TemaMetaData tabellen fra PowerShell'

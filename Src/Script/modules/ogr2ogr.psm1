@@ -7,19 +7,26 @@ function TemaToDB{
         [Parameter(Mandatory=$True)]
         [System.Data.DataRow]
         $Row
-    )        
+    )   
+    [bool] $success = $false     
     $fileNames = Get-ChildItem -Path $Folder -File -Recurse -Include *.tab,*.shp
     if (!$fileNames)
     {
         Write-Log -Message "$Folder indeholdte ingen filer"  -Level "Fatal"|Out-Null 
-        return $false       
+        return $success   
     }
     else
     {            
         foreach ($fileName in $fileNames)
         {
-            SendtoOGR -fileName $fileName -Row $Row
-        }        
+            $success = SendtoOGR -fileName $fileName -Row $Row   
+            # Special case for kommunegrænser
+            if ($fileName -match "KOMMUNE.shp")
+            {
+               break                
+            }         
+        }
+        return $success        
     } 
 }
 
@@ -43,7 +50,7 @@ function SendtoOGR{
         if ($fileTable.ToLower() -ne  $table.ToLower())
         {
             Write-Log -Message "Theme: $table skipped, since not matching filename: $fileTable " -Level "Debug" | Out-Null
-            return
+            return $false
         }
     }
 
@@ -70,13 +77,15 @@ function SendtoOGR{
     "$fileName"
 "@
 
+    [bool] $success = $false
     Write-Log -Message "Path to ogr2ogr: $exeFile" -Level "Verbose" | Out-Null
     Write-Log -Message "Arguments for ogr2ogr: $Args" -Level "Verbose" | Out-Null
     try 
     {
         Write-Log -Message "Importerer tabellen TEMP.$table til SQL Serveren" -Level "Info"| Out-Null
         $retval = (Start-Process -FilePath $exeFile -PassThru -Wait -NoNewWindow -ArgumentList $Args).ExitCode
-        #$retval = 0
+       # $retval = 0
+       # Write-Log "Ged123"
         if ($retval -ne 0)
         {
             Write-Log -Message "Fatal fejl da vi koerte OGR2OGR havde fejlkoden: $retval" -Level "Fatal"
@@ -86,9 +95,17 @@ function SendtoOGR{
         {
             # It was a success, so needs to update log table as well as TemaMetaData  
             Write-Log -Message "Success med import af $table" -Level "Info"| Out-Null
-            MoveToProdScheme -TableName $table
-            Update_TMD_WithUpdateTime -ID $Row[0]
-            LogEntryToDatabase -TEMAMETADATAID $Row[0] -FEJLKODE 0 -FEJLTEKST "$table importeret ok"
+            if (MoveToProdScheme -TableName $table)
+            {
+                Update_TMD_WithUpdateTime -ID $Row[0]
+                LogEntryToDatabase -TEMAMETADATAID $Row[0] -FEJLKODE 0 -FEJLTEKST "$table importeret ok"
+                $success = $True
+            }
+            else
+            {
+                LogEntryToDatabase -TEMAMETADATAID $Row[0] -FEJLKODE 1 -FEJLTEKST "$table ikke flyttet til Prod skema"    
+            }
+            
         }
     }
     catch [Exception]
@@ -101,7 +118,8 @@ function SendtoOGR{
         LogEntryToDatabase -TEMAMETADATAID $guid -FEJLKODE 1 -FEJLTEKST $retval      
     }    
     # Reset path to old path
-    $Env:Path = $oldPath
+    $Env:Path = $oldPath   
+    return $success
 }
 
 

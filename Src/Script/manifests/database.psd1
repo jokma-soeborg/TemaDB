@@ -62,7 +62,7 @@
     # NestedModules = @()
     
     # Functions to export from this module
-    FunctionsToExport = 'TestDB', 'GetTemaLagToUpdate', 'MoveToProdScheme', 'Update_TMD_WithUpdateTime', 'LogEntryToDatabase'
+    FunctionsToExport = 'TestDB', 'GetTemaLagToUpdate', 'MoveToProdScheme', 'Update_TMD_WithUpdateTime', 'LogEntryToDatabase', 'GetSecurePwd', 'SetSecurePwd'
     
     # Cmdlets to export from this module
     CmdletsToExport = '*'

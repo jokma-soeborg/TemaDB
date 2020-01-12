@@ -13,7 +13,7 @@ Følgende Regions programmer benytter pt. dette:
 
 * RIT (V3.3 og nyere)
 
-### Installation ###
+### Installation/Update ###
 
 * Se [Install](https://github.com/Danske-Regioner-Miljoe-Tvaerregional/PowerShell-RIT/blob/master/INSTALL.MD)
 

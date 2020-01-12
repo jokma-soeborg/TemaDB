@@ -55,6 +55,108 @@ function GetTemaLagToUpdate()
     return, $ds
 }
 
+function GetSecurePwd{
+    [CmdletBinding()]
+    Param(
+        [Parameter(Mandatory=$True)]
+        [string]
+        $ID
+    )
+    try 
+    {    
+        $scon = New-Object System.Data.SqlClient.SqlConnection
+        $scon.ConnectionString = $($MyCfg.SQL.ConnectionString)         
+        $cmd = New-Object System.Data.SqlClient.SqlCommand
+        $cmd.Connection = $scon
+        $cmd.CommandTimeout = 0
+        $cmd.CommandType = [System.Data.CommandType]::StoredProcedure
+        $cmd.CommandText = "PROD.spGetSourcePwd"
+        [guid]$Guid = [System.guid]::New($ID)
+        $cmd.Parameters.AddWithValue("@TemaMetaDataID", $Guid)
+        $paramReturn = $cmd.Parameters.Add("@pwd", "")        
+        $paramReturn.Direction = [System.Data.ParameterDirection]::Output
+        $paramReturn.Size = 256
+        try
+        {
+            $scon.Open()            
+            $cmd.ExecuteNonQuery()            
+        }
+        catch [Exception]
+        {
+            $e = $_.Exception
+            $line = $_.InvocationInfo.ScriptLineNumber
+            $msg = $e.Message
+            Write-Log -Message "Exception paa linie $line var `"$msg`""  -Level "Fatal"|Out-Null
+            Write-Log -Message $e -Level "Fatal"|Out-Null            
+        }
+        finally
+        {
+            $scon.Dispose()
+            $cmd.Dispose()
+        }
+        return $paramReturn.Value
+    }
+    catch [Exception]
+    {
+        $e = $_.Exception
+        $line = $_.InvocationInfo.ScriptLineNumber
+        $msg = $e.Message
+        Write-Log -Message "Exception paa linie $line var `"$msg`""  -Level "Fatal"|Out-Null
+        Write-Log -Message $e -Level "Fatal"|Out-Null        
+    }  
+}
+
+function SetSecurePwd{
+    [CmdletBinding()]
+    Param(
+        [Parameter(Mandatory=$True)]
+        [string]
+        $ID,
+        [Parameter(Mandatory=$True)]
+        [string]
+        $Pwd
+    )
+    try 
+    {    
+        $scon = New-Object System.Data.SqlClient.SqlConnection
+        $scon.ConnectionString = $($MyCfg.SQL.ConnectionString)         
+        $cmd = New-Object System.Data.SqlClient.SqlCommand
+        $cmd.Connection = $scon
+        $cmd.CommandTimeout = 0
+        $cmd.CommandType = [System.Data.CommandType]::StoredProcedure
+        $cmd.CommandText = "PROD.spSetSourcePwd"
+        [guid]$Guid = [System.guid]::New($ID)
+        $cmd.Parameters.AddWithValue("@TemaMetaDataID", $Guid) |Out-Null  
+        $cmd.Parameters.AddWithValue("@pwd", $pwd) | Out-Null
+        try
+        {
+            $scon.Open()            
+            $cmd.ExecuteNonQuery()            
+        }
+        catch [Exception]
+        {
+            $e = $_.Exception
+            $line = $_.InvocationInfo.ScriptLineNumber
+            $msg = $e.Message
+            Write-Log -Message "Exception paa linie $line var `"$msg`""  -Level "Fatal"|Out-Null
+            Write-Log -Message $e -Level "Fatal"|Out-Null            
+        }
+        finally
+        {
+            $scon.Dispose()
+            $cmd.Dispose()
+        }
+    }
+    catch [Exception]
+    {
+        $e = $_.Exception
+        $line = $_.InvocationInfo.ScriptLineNumber
+        $msg = $e.Message
+        Write-Log -Message "Exception paa linie $line var `"$msg`""  -Level "Fatal"|Out-Null
+        Write-Log -Message $e -Level "Fatal"|Out-Null        
+    }  
+}
+
 function MoveToProdScheme{
     [CmdletBinding()]
     Param(
@@ -69,18 +171,16 @@ function MoveToProdScheme{
     
     $cmd = New-Object System.Data.SqlClient.SqlCommand
     $cmd.Connection = $scon
-    $cmd.CommandTimeout = 0
-
-    
-    #$sqlParam1 = New-Object System.Data.SqlClient.SqlParameter("@TableName",$TableName)    
+    $cmd.CommandTimeout = 0         
 
     $cmd.CommandText = "EXEC dbo.spPSMoveTabelToProd @TableName"
     $cmd.Parameters.AddWithValue("@TableName", $TableName)|Out-Null    
-
+    [bool] $success = $false
     try
     {
         $scon.Open()
         $cmd.ExecuteNonQuery() | Out-Null
+        $success = $True
     }
     catch [Exception]
     {
@@ -89,8 +189,9 @@ function MoveToProdScheme{
     finally
     {
         $scon.Dispose()
-        $cmd.Dispose()
+        $cmd.Dispose()        
     }
+    return $success
 }
 
 function Update_TMD_WithUpdateTime{
@@ -202,3 +303,5 @@ Export-ModuleMember -Function GetTemaLagToUpdate
 Export-ModuleMember -Function MoveToProdScheme
 Export-ModuleMember -Function Update_TMD_WithUpdateTime
 Export-ModuleMember -Function LogEntryToDatabase
+Export-ModuleMember -Function GetSecurePwd
+Export-ModuleMember -Function SetSecurePwd
