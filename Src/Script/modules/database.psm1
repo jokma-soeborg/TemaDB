@@ -75,7 +75,7 @@ function GetSecurePwd{
         $cmd.Parameters.AddWithValue("@TemaMetaDataID", $Guid)
         $paramReturn = $cmd.Parameters.Add("@pwd", "")        
         $paramReturn.Direction = [System.Data.ParameterDirection]::Output
-        $paramReturn.Size = 256
+        $paramReturn.Size = 1024
         try
         {
             $scon.Open()            

@@ -21,6 +21,14 @@
             "cwd": "${workspaceRoot}/Script"
         },
         {
+            "name": "TemaDB -SetPwd",
+            "type": "PowerShell",
+            "request": "launch",
+            "script": "${workspaceRoot}/Src/Script/TemaDB.ps1",
+            "args": [ "-Mode", "SetPwd" ],
+            "cwd": "${workspaceRoot}/Script"
+        },
+        {
             "name": "PowerShell Launch Current File",
             "type": "PowerShell",
             "request": "launch",

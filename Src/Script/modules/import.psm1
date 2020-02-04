@@ -54,7 +54,7 @@ function ImportTemaLag(){
     else
     {
         Write-Log -Message "Kunne ikke finde $outpath" -Level "Warn"|Out-Null
-        $temalag.Remove($Row[1])
+        $temalag.Remove($Row[2])        
     }
 }
 
@@ -65,8 +65,7 @@ function Unzip
     $ExtractDir = "$PSScriptRoot\..\$($MyCfg.IMPORT.ExtractDir)"
     $outpath = $ExtractDir + "\" + [io.path]::GetFileNameWithoutExtension($zipfile)
     Write-Log -Message "Extracting $zipfile to $outpath" -Level "Debug"| Out-Null
-    Expand-Archive $zipfile -DestinationPath $outpath -Force
-    
+    Expand-Archive $zipfile -DestinationPath $outpath -Force    
 }
 
 function DownloadTemaLag(){
@@ -95,6 +94,7 @@ function DownloadTemaLag(){
             # Download the file
         try
         {
+            Write-Log -Message "Start file download of: $Url" -Level "Debug" | Out-Null   
             Invoke-WebRequest -Uri $Url -OutFile $OutputFile -Credential $Cred
             Write-Log -Message "File downloaded" -Level "Debug" | Out-Null        
         }
