@@ -1,8 +1,8 @@
 -- ==========================================================================
 -- Author                 : TMI, RUA Sweco
 -- Create date            : 2019-08-12
--- Updated                : $Date: 2019-09-03 17:19:47 +0200 (ti, 03 sep 2019) $
--- Updated by             : $Author: rua $
+-- Updated                : $Date: 2019-12-29 00:15:22 +0100 (sø, 29 dec 2019) $
+-- Updated by             : $Author: admtmi $
 -- Description            : Procedure til at flytte en tabel fra TEMP skema til PROD skema fra PowerShell
 --
 -- Release number         : 1.0
@@ -13,7 +13,7 @@ SET ANSI_PADDING ON
 SET NOCOUNT ON
 GO
 
-DECLARE @svn_revision	varchar(15)	= '$Rev: 1955 $'
+DECLARE @svn_revision	varchar(15)	= '$Rev: 31 $'
 DECLARE @db_version		varchar(15)	= '1.0' 
 DECLARE @scriptnavn		varchar(60)	= '013 spPSMoveTabelToProd.sql'
 DECLARE @beskrivelse	varchar(250)= 'Procedure til at flytte en tabel fra temp skema til prod skema fra PowerShell'

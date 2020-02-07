@@ -27,7 +27,12 @@ function Write-Log{
     $levelPos = [array]::IndexOf($levels, $Level)
     $Stamp = (Get-Date).toString("yyyy/MM/dd HH:mm:ss:fff")    
 
-    Reset-Log($logFile, $MyCfg.Logs.logSize, $MyCfg.Logs.logCount)    
+    #Reset-Log($logFile, $MyCfg.Logs.logSize, $MyCfg.Logs.logCount)    
+
+    $MaxSize = [System.Int64]($MyCfg.Logs.logSize / 1)
+    
+
+    Reset-Log -fileName $logFile -filesize $MaxSize -logcount $MyCfg.Logs.logCount
 
 
     if ($logLevelPos -lt 0){
@@ -136,20 +141,29 @@ Function Write-LogLine ($Line) {
     {
         if ($Line -Match 'FATAL')
         {
-            Write-Host $Line -ForegroundColor Red
-
-
+            Write-Host $Line -ForegroundColor Red     
         }
         else
         {
             Write-Host $Line       
         }        
     }
+    if ($Line -Match 'FATAL')
+    {        
+        # Check if mail module is imported, before trying to send an email        
+        if (Get-Module "email")
+        {
+            SendErrorMail $Line
+        }            
+    }
 }
 
 # to null to avoid output
+$MaxSize = [System.Int64]($MyCfg.Logs.logSize / 1)
+
 $Null = @(
-    Reset-Log -fileName $logFile -filesize $logSize -logcount $logCount
+$MaxSize = [System.Int64]($MyCfg.Logs.logSize / 1)
+    Reset-Log -fileName $logFile -filesize $MaxSize -logcount $logCount
 )
 
 Export-ModuleMember -Function "Write-Log"

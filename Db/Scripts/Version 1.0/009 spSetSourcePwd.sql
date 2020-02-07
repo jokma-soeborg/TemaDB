@@ -3,11 +3,11 @@ GO
 -- ==========================================================================
 -- Author                 : RUA, Sweco
 -- Create date            : 2019-08-08
--- Updated                : $Date: 2019-08-08 13:31:38 +0200 (to, 08 aug 2019) $
--- Updated by             : $Author: rua $
+-- Updated                : $Date: 2019-12-29 00:15:22 +0100 (sø, 29 dec 2019) $
+-- Updated by             : $Author: admtmi $
 -- Description            : Stored procedure spSetSourcePwd
 -- ==========================================================================
-DECLARE @svn_revision	varchar(15)	= '$Rev: 1855 $'
+DECLARE @svn_revision	varchar(15)	= '$Rev: 31 $'
 DECLARE @db_version		varchar(15)	= '1.0'
 DECLARE @scriptnavn		varchar(60)	= '009 spSetSourcePwd.sql'
 DECLARE @beskrivelse	varchar(250)= 'Stored procedure spSetSourcePwd'

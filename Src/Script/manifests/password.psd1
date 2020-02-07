@@ -1,17 +1,16 @@
 #
-# Module manifest for module 'database'
-
+# Module manifest for module 'password'
 
 @{
 
     # Script module or binary module file associated with this manifest
-    RootModule = './../modules/database.psm1'
+    RootModule = './../modules/password.psm1'
     
     # Version number of this module.
     ModuleVersion = '1.0'
     
     # ID used to uniquely identify this module
-    GUID = '5b558115-284b-447d-a258-80352caa6e6a'
+    GUID = 'fd4ce97d-d5e9-440d-8b21-ced236e87fb2'
     
     # Author of this module
     Author = ''
@@ -62,7 +61,7 @@
     # NestedModules = @()
     
     # Functions to export from this module
-    FunctionsToExport = 'TestDB', 'GetTemaLagToUpdate', 'MoveToProdScheme', 'Update_TMD_WithUpdateTime', 'LogEntryToDatabase', 'GetSecurePwd', 'SetSecurePwd'
+    FunctionsToExport = 'SetPwd', 'GetPwd', 'CreateAESKey'
     
     # Cmdlets to export from this module
     CmdletsToExport = '*'

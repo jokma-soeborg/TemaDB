@@ -1,8 +1,8 @@
 -- ==========================================================================
 -- Author                 : TMI, RUA Sweco
 -- Create date            : 2019-09-02
--- Updated                : $Date: 2019-09-02 14:10:12 +0200 (ma, 02 sep 2019) $
--- Updated by             : $Author: rua $
+-- Updated                : $Date: 2019-12-29 00:15:22 +0100 (sø, 29 dec 2019) $
+-- Updated by             : $Author: admtmi $
 -- Description            : View OpdateringsLog_v
 --
 -- Release number         : 1.0
@@ -13,7 +13,7 @@ SET ANSI_PADDING ON
 SET NOCOUNT ON
 GO
 
-DECLARE @svn_revision	varchar(15)	= '$Rev: 1952 $'
+DECLARE @svn_revision	varchar(15)	= '$Rev: 31 $'
 DECLARE @db_version		varchar(15)	= '1.0' 
 DECLARE @scriptnavn		varchar(60)	= '016 OpdateringsLog_v.sql'
 DECLARE @beskrivelse	varchar(250)= 'View OpdateringsLog_v'

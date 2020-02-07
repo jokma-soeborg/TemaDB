@@ -1,17 +1,17 @@
 #
-# Module manifest for module 'database'
+# Module manifest for module 'email'
 
 
 @{
 
     # Script module or binary module file associated with this manifest
-    RootModule = './../modules/database.psm1'
+    RootModule = './../modules/email.psm1'
     
     # Version number of this module.
     ModuleVersion = '1.0'
     
     # ID used to uniquely identify this module
-    GUID = '5b558115-284b-447d-a258-80352caa6e6a'
+    GUID = 'd72b2b2e-58f8-4225-b608-b5153d442df2'
     
     # Author of this module
     Author = ''
@@ -62,7 +62,7 @@
     # NestedModules = @()
     
     # Functions to export from this module
-    FunctionsToExport = 'TestDB', 'GetTemaLagToUpdate', 'MoveToProdScheme', 'Update_TMD_WithUpdateTime', 'LogEntryToDatabase', 'GetSecurePwd', 'SetSecurePwd'
+    FunctionsToExport = 'SendInfoMail', 'SendErrorMail', 'TestMail'
     
     # Cmdlets to export from this module
     CmdletsToExport = '*'

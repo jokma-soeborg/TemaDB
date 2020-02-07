@@ -1,11 +1,11 @@
 ﻿-- ==========================================================================
 -- Author                 : RUA, Sweco
 -- Create date            : 2019-06-10
--- Updated                : $Date: 2019-08-30 15:10:45 +0200 (fr, 30 aug 2019) $
--- Updated by             : $Author: rua $
+-- Updated                : $Date: 2019-12-29 00:15:22 +0100 (sø, 29 dec 2019) $
+-- Updated by             : $Author: admtmi $
 -- Description            : Metadata for temaer i RIT
 -- ==========================================================================
-DECLARE @svn_revision	varchar(15)	= '$Rev: 1948 $'
+DECLARE @svn_revision	varchar(15)	= '$Rev: 31 $'
 DECLARE @db_version		varchar(15)	= '1.0'
 DECLARE @scriptnavn		varchar(60)	= '006 TemaMetaData.sql'
 DECLARE @beskrivelse	varchar(250)= 'Metadata for temaer i RIT'
